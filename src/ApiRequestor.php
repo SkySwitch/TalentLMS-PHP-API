@@ -6,6 +6,7 @@ use \Exception;
 
 class ApiRequestor
 {
+    const USER_NOT_FOUND_MSG = 'The requested user does not exist';
 
     public static function request($method, $url, $params = null)
     {
@@ -139,7 +140,7 @@ class ApiRequestor
             );
         }
 
-        if ($rcode == 404 && isset($response['error']['message']) && $response['error']['message'] === 'The requested user does not exist') {
+        if ($rcode == 404 && isset($response['error']['message']) && $response['error']['message'] === self::USER_NOT_FOUND_MSG) {
             return;
         }
        
